@@ -1,11 +1,12 @@
 
 import sys
 from openpyxl import Workbook, load_workbook
+from openpyxl.worksheet.worksheet import Worksheet
 import os
 
 TEST_CONTENTS_COLUMN = 'B'
 
-def main():
+def main() -> None:
     try:
         arg = sys.argv[1]
     except IndexError:
@@ -18,16 +19,15 @@ def main():
     exit(0)
 
 
-def getWorksheet() -> Workbook:
+def getWorksheet() -> Worksheet:
     wb = load_workbook('Testing.xlsx', data_only=True, read_only=True)
     sheetName = wb.sheetnames[0]
     ws = wb[sheetName]
     return ws
 
 
-def createTestFiles(ws: Workbook):
+def createTestFiles(ws: Worksheet):
 
-    # testCells = ws[TEST_CONTENTS_COLUMN]
     try:
         os.makedirs('Tests')
     except:
